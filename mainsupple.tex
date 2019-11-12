@@ -1,0 +1,34 @@
+% NSF proposal generation template style file.
+% based on latex stylefiles written by Stefan Llewellyn Smith and
+% Sarah Gille, with contributions from other collaborators.
+%
+\documentclass{proposalnsf}
+
+% See this file for a set of pre-defined journal abbreviations
+\input{journal-abbreviations.tex} 
+
+\newcommand{\degrees}{$\!\!$\char23$\!$}
+\renewcommand{\refname}{\centerline{References cited}}
+
+% This handles hanging indents for publications
+\def\rrr#1\\{\par
+\medskip\hbox{\vbox{\parindent=2em\hsize=6.12in
+\hangindent=4em\hangafter=1#1}}}
+
+\def\baselinestretch{1}
+
+\begin{document}
+
+\noindent{\Large \bf j. Supplementary Material}
+
+\section{Postdoctoral Mentoring Plan - 2 page}
+\input{postdoc}
+\clearpage
+\section{Data Management Plan - 1 page}
+
+
+
+\clearpage
+
+
+\end{document}

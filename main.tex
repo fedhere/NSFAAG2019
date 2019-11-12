@@ -1,0 +1,238 @@
+% NSF proposal generation template style file.
+% based on latex stylefiles written by Stefan Llewellyn Smith and
+% Sarah Gille, with contributions from other collaborators.
+%
+\documentclass{proposalnsf}
+
+% See this file for a set of pre-defined journal abbreviations
+\input{journal-abbreviations.tex} 
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\keyword}[2]
+
+\newcommand{\degrees}{$\!\!$\char23$\!$}
+\newcommand{\armin}[1]{\colorbox{cyan}{#1}}
+\newcommand{\austin}[1]{\colorbox{yellow}{#1}}
+\newcommand{\greg}[1]{\colorbox{orange}{#1}}
+\newcommand{\josh}[1]{\colorbox{green}{#1}}
+\newcommand{\red}[1]{\colorbox{red}{#1}}
+\newcommand{\ana}[1]{\colorbox{red}{#1}}
+\newcommand{\changeit}[1]{\colorbox{magenta}{#1}}
+
+\renewcommand{\refname}{\centerline{References cited}}
+
+% This handles hanging indents for publications
+\def\rrr#1\\{\par
+\medskip\hbox{\vbox{\parindent=2em\hsize=6.12in
+\hangindent=4em\hangafter=1#1}}}
+
+\def\baselinestretch{1}
+
+\begin{document}
+
+\begin{center}
+{\Large{\bf Project Summary}}\\*[3mm]
+{\bf AI detecting reflections in the LSST data} \\*[3mm]
+
+Federica B. Bianco, PI \\
+Austin J. Brockmeier, CoI\\
+Armin Rest, Collaborator\\
+Gregory Dobler, COllaborator\\
+Joshua Peek, Collaborator
+\end{center}
+
+{\LARGE{
+\noindent
+\armin{Armin please review}\\
+\austin{Austin please review}\\
+\greg{Greg please review}\\
+\josh{Josh please review}\\
+\ana{Ana please review}\\
+\changeit{To be changed}}}
+
+\medskip
+\medskip
+\medskip
+
+\changeit{This is a  proposal to do .....}
+
+\medskip
+\noindent
+{\bf Intellectual Merit}
+
+The Large Synoptic Survey Telescope (LSST) is the US flagship astronomical project of the 2020s.  LSST will conduct a 10-year survey generating an unprecedented amount of information-dense data: 20Tb/night, every night, for 10 years, pushing the envelope of big-data and data-science.  Observing the whole southern sky every few days, the LSST data reduction software will detect tens of thousands of changes in the sky every night, from transiting planets to exploding stars, but it will entirely miss light echoes: the reflection of ancient stellar explosions that light up the cosmic dust.  The detection of light echoes enables the reconstruction of the history of explosion of stars in our Galaxy, including the potential to detect an unknown galactic supernova, and the tracing of the Milky Way dust structure, which informs the evolution history of the Galaxy and improve inferences on extragalactic sources by constraining extinction. However, light echoes are faint, rare, and diffuse features that change over time, and are hard to detect.  Presently, no automated pipeline for this task exists. LSST will observe the entire southern sky at $\sim$day time intervals and with high sensitivity and spatial resolution, making it the ideal survey to detect light echoes.  This program will support the development of the first pipeline for the automated detection of light echoes by leveraging cutting edge artificial intelligence techniques and its deployment on the LSST computing platform. 
+\medskip
+
+\noindent
+{\bf Broader Impacts}
+\medskip
+\changeit{TO DO}
+\renewcommand{\thepage} {B--\arabic{page}}
+
+%\newpage
+
+% reset page numbering to 1.  This is helpful, since the text can only
+% be 15 pages, and reviewers will want to believe we've kept within
+% those limits
+
+\pagenumbering{arabic}
+\renewcommand{\thepage} {D--\arabic{page}}
+
+\newpage
+
+\centerline{\bf Results from Prior NSF Support}
+
+\noindent
+{\bf Previous Award Title}
+{\it award number} (PI); dates, \$amount
+
+Research carried out ....
+
+\ \\
+
+\noindent{\Large \bf PROJECT DESCRIPTION}
+
+\section{Introduction}
+
+
+About a century ago a true paradigm shift happened in astronomy.  The introduction of digital equipment enabled the discovery and study of the “transients and variable sky” : the sky that in all human mythologies was assumed to be never-changing came to life with the detection of energetic phenomena happening every instant: 10 stars explode every second [a], stars merge deforming space-time in gravitational waves [a], they erupt [a], and more.  A century ago seeing an astronomical transient was a once-in-a-lifetime event, yet today we have barely scratched the surface. Until now, astronomical surveys were limited in either depth, only enabling the observation of the closest and brightest transients, area, observing small regions of sky, or resolution.  Today we can detect ~100 transients each night [4].  LSST will detect tens of thousands, representing not an incremental, but a transformational change. 
+
+{\bf The LSST project} includes the construction of a telescope and a 10-year survey to begin in 2022 [5]. LSST will deliver an unprecedented volume of information-dense data (20Tb/night) with the potential to revolutionize nearly all astrophysics domains [6], from revealing the smallest bodies in the Solar System, to measuring the rate of expansion of the Universe.  LSST will photograph the sky at resolution and depth comparable to those of the Hubble Space Telescope, but unlike previous surveys, limited to small regions, it will deliver observations at a few days’ cadence over the whole southern sky.  This will truly open a window into the transient Universe. 
+
+{\bf Light Echoes} (LEs) are the reflection of stellar explosions on interstellar dust. They appear in the sky as diffuse transients: faint, extended, time-varying [7]. 
+As part of its federally funded operations, LSST will produce $10^6$ nightly alerts, each one announcing a changing or moving source (stars, asteroids, etc).  It will detect thousands of transients and variable “point sources” in each image but these diffuse features will be entirely missed.  LEs help characterize stellar explosions by offering the view of an explosion from different lines of sight, a unique opportunity in astrophysics [8,9] 
+ and allowing us to revisit events even when the transient was originally not detected [10]. 
+{\bf\emph{ The detection of light echoes across a large portion of the sky enables the reconstruction of the history of stellar explosions of our Galaxy, the potential to detect an unknown galactic supernova, and the tracing of the Milky Way dust structure, which will inform the evolutionary history of the Galaxy and improve inference on extragalactic sources by constraining extinction. }}
+
+
+{\bf However, light echoes are extremely hard to detect}, and, to date, they are still discovered by visual inspection, a method that obviously does not scale to the LSST data volume.  Even crowd-sourcing cannot help this science in the LSST era: simple scaling from the Galaxy Zoo \ana{[CITE]} project indicates that the entire population of the Earth would be insufficient to study the full dataset using the same methods.  We propose to leverage Artificial Intelligence to address this low signal-to-noise regime computer-vision challenge and create the first pipeline for automated detection of light echoes.  {\bf \emph{This will allow us to use images from the LSST survey to produce a census of light echoes that would constrain the history of Milky Way stellar explosions.  The two-year timeline of this proposal aligns perfectly with LSST, with the first commissioning data expected in 2021 and the survey begin observing in late 2022}}.
+
+
+
+%%% 
+{\LARGE{THE REST OF THIS SECTION  IS STILL BEING DRAFTED AND NOT READY FOR REVIEW}}
+
+a rare and peculiar phenomenon called Light Echoes [14]: as the light from a transient propagates into space, it may be reflected towards Earth, and our telescopes, if it encounters a sheet of interstellar dust.  Light echoes appear as faint, extended, time-changing features in the sky.  The vast majority of astronomical transients, however, are “point sources”, and detection software, including the LSST pipelines, are optimized for the detection of these point-source transients. 
+In addition, light echoes are rare, or rather: light echoes that are bright enough to be detected by present surveys, that are not as sensitive, or not as broad as LSST, are rare. LSST will usher a new era in the study of light echoes by observing the entire hemisphere sky repeatedly at high spatial resolution and high sensitivity (limiting single-image depth magnitude g~24). 
+The detection of light echoes is a difficult computer vision problem.  The challenges include:
+- these features have diverse time-changing shapes, depending on the underlying dust structure and on the travel speed of the light across the dust (dominated by line-of-sight effects)
+- reflections inside the telescope constitute a significant source of false positives, which cannot be disambiguated within a single image and requires time sequences to be analyzed.
+- light echoes appear as faint and diffuse features, ranging in luminosity until they blend into the image noise.  This problem is distinctly different from most image detection and recognition tasks, where the presence of the target object is unambiguous, and resolution is the most likely limiting factor.  
+- the training set is limited: a few hundred examples.  This is a particular challenge in machine learning and artificial intelligence approaches. 
+
+This proposal will support the development of an Artificial Intelligence (AI) model, a Generative Adversarial Neural Network [15], to detect light echoes.  Deep Neural Networks and AI have recently been employed to solve astronomical tasks, primarily due to the rapid increase in data volume, which will culminate with the LSST survey and which requires scalable models that can efficiently extract information from Terabytes of data [e.g. 16].  Over the course of the next two years we expect to develop a model to detect light echoes automatically in sky images and test the model on LSST precursor surveys.  Attempts to develop software to automatically detect light echoes that are based on human-engineered features in images have not been successful, and by far the best method to detect light echoes to date is human-inspection. However, human-inspection obviously cannot scale to the volume of data generated by LSST and to the scope of the problem we ultimate propose to approach: the creation of a comprehensive census of Galactic light echoes to study the history of stellar explosions and eruptions in the Milky Way.  
+The light echo detection problem is similar to the well-known, and notoriously difficult problem of detecting smoke-stacks and plumes, which PI Bianco also worked on in the context of Urban Science with a deep learning approach similar to the one proposed here (at the Urban Observatory [17]).  This work will constitute a core portion of the PhD Thesis of one of PI Bianco’s graduate students at the DPA.  We will start from the limited size sample of real light-echo examples, a dataset of simulated light echoes generated analytically, and images of the underlying dust wherever available (infrared observations of the sky reveal dust features, but high-resolution images are not available across the entire sky).  We will use successful Generative Adversarial Neural Networks designed to work under similar circumstances of limited-size real examples and simulated data [18].  Our team will retrain this network on light echo images from telescopes systems similar to the LSST (e.g. from the Blanco telescope Dark Energy Camera, DES, images obtained in proposals co-authored by PI Bianco), and change the network architecture to suit our needs. We expect to be able to test our model on real data as soon as commissioning data from LSST will become available.  In the meantime, our software can run on Blanco/DES images, that share many of the crucial characteristics of the LSST data but are not as sensitive to faint magnitudes, leading to a lower detection rate, looking for known and unknown light echoes. 
+On the long term, detecting light echoes will enable several science projects.  Light echoes enable the study of transients from multiple lines of sight, a unique opportunity in astrophysics, allowing insight into the physical mechanism of stellar eruptions and explosions [3,8,9,19,20].  Transients can be studied in their light echoes: this technique has enabled the characterization of historical supernovae with modern instrumentation [8,19,20]; the study of the dust structure that reflects the light allows us to characterize and study stellar eruptions through the characteristics of the ejection of material [21].  Light echoes may reveal unobserved Galactic supernovae.  Furthermore, with LSST we expect to be able to do something unprecedented: build a census of Galactic light echoes that will allow us to reconstruct the history of explosions and eruptions of the Milky Way, providing insight into the evolution of our Galaxy.  Due to its sensitivity, LSST will for the first time enable observation of very faint phenomena on all-sky scale.  Since all Galactic dust shines in reflected light, however faintly, the detection of light echoes will also enable the study of the Galaxy dust structure on large scale.  In combination with studies of the structure from stellar extinction (its ability to absorb light [22]) this will provide an unprecedentedly detailed, three-dimensional map of the Galactic dust which will inform studies of Galaxy formation and improve the characterization of any observed extragalactic source. 
+The two-year timeline of this proposal aligns perfectly with LSST, whose  first commissioning data are expected in 2021 and which will begin observing in 2022.  The work to be conducted under this proposal will produce important software that will allow us to “hit the ground running” and begin detecting light echoes in LSST images as soon as the LSST survey begins to produce data. 
+
+\section{Light echoes phenomenology and significance}
+
+More text.
+
+\subesction{Transients}
+
+More text.
+\subsection{Dust}
+
+More text.
+
+\section{Light echoes forward modeling}\label{sec:fwm}
+
+We have developed a method that can create realistic, data-driven light echos as a training set for our neural networks. The method uses real ISM data from 21-cm, neutral hydrogen (HI)  data cubes. 21-cm is a powerful tool here, as we know that HI is well mixed with dust. Further, in many cases velocity is a good proxy for dust (see Tchernyshov & Peek 2017 for details). Finally we now have very high spatial resolution and spatial dynamic range data cubes available (Peek+ 2018, McClure-Griffiths+ 2015) so we can emulate the high resolution imaging of PS1 (?)
+
+If we consider a voxel in the HI data cube to be some intensity at a position ra ($\alpha$), dec ($\delta$), radial velocity (v), we can define a plane such that 
+
+$$1~=~A~*~\alpha~+~B~*~\delta~+~C~*~v$$
+
+We then take all the pixels near this plane in the HI data cube and integrate them along the velocity dimension to create a plane-of-sky image, which we can scale to realistic light-echo amplitudes. If we tip the plane at the right angle to velocity (i.e. set the C-value appropriately), we can mimic the way the light echo slice through distance space and create very realistic structures. The data volume of these HI cubes is so large, and the number of possible values of A and B so variable, we can generate far more synthetic echoes than even the largest networks will need. The first time collaborator peek showed this effect to collaborator ( and expert  light-echo hunter) Rest, Rest was quite astonished with the likeness of the results to real light echoes. He was unsure whether he could distinguish these from real echoes when co-added to real imaging data.
+
+
+\section{GANS for image processing and analysis}
+
+More text.
+
+\section{Proposed methodology}
+
+More text.
+\section{GANS with real and simulated images}
+
+More text.
+
+\section{GANS with real and dust images}
+
+More text.
+
+\section{A model to extract dust structure from light echoes}
+
+
+More text.
+
+\section{Another Section}
+
+More text.
+
+
+\section{Time Line and Management Plan}
+
+\subsection{Our team}
+PI Bianco is a new faculty member at the University of Delaware (UD) Physics and Astronomy Department and Biden School of Public Policy and Administration. as well as a Resident Faculty member of the new UD Data Science Institute.
+
+PI Bianco’s scientific expertise range from data science to data-driven inference in astronomical transients, from nearby Solar System [12] to distant Supernova explosions [13].  She works closely with the team building and scoping the LSST telescope and survey and represents the community working on LSST in various settings (e.g. recently at the National Academy of Science Space Science Week, invited by the Committee on Astronomy and Astrophysics). 
+
+Among the many transient phenomena in PI Bianco’s research portfolio, she has worked on LEs collaborating with CoI Rest leading the data collection and analysis at the Las Cumbres Observatory Global network, which contributed the majority of the image data analyzed in [3] and focusing on the extraction of lightcurves from LEs that supports the analysis of typing and spectral evolution [19, 20, 24]
+and studies that relate diversity in transients to asymmetry as assessed from light echoes. Additionally, she is working on technically similar computer vision issues in the context of urban imaging at the Urban Observatory \changeit[CITE], a multi-city facility lead by Collaborator Dobler where urban environments are studied through imaging and techniquest adapted from astronomy (i.e. photometry, spectroscopy) developing methodology to detect of faint transient diffused feature generated by building HVAC system and other emissions \changeit[CITE].
+
+\armin{PLEASE REVIEW}
+Rest is a world-renowned expert in light echoes, from detection to transient characterization. He has lead several succesfull programs devoted to the study of light echoes, including current NSF program \colorbox{red}{XXX}. He also has lead the acquisition and analysis of light echo data used in this proposal \colorbox{red}{NOAO PROPOSAL NUMBERS FOR DECAM IMAGES}. In this project, he will supervise a Graduate student from John Hopkins University in year 1, as well as co-advising the UD Graduate students in developing a detailed work plan and set up the data access, ingestion, and manual labeling to create a standardized dataset of light echoes over which the performance of our models will be measured.   
+
+\austin{PLEASE REVIEW}
+
+CoI Brockmeier is a new faculty member at the University of Delaware (UD) Electrical and Computer Engineering and,  as well, a Resident Faculty member of the new UD Data Science Institute. His expertise in signal processing range from hyperspectral to 
+
+\section{Summary:  Significance of proposed work}
+
+More text.
+
+\subsection{Intellectual Merit}
+
+More text.
+\section{Unfunded Collaborators}
+
+\subsection{CoI Armin Rest, STScI}
+
+
+
+
+\subsection{Collaborator Joshua Peek, STScI}
+Peek is an Associate Astronomer and the Data Science Mission Office Project Scientist at the Space Telescope Science Institute. He developed the forward modeling methodology for light echoes and produced several simulations as described in~\autoref{sec:fwm}. He will make his existing simulations available and coach students in the methodology to create a comprehensive training sample to be fed to our GANs. 
+
+\subsection{Collaborator Gregory Dobler, UDelaware}
+Dobler is an Assistant Professor at the Department of Physics and Astronomy, Biden School of Public Policy and Administration, and Data Science Institute at the University of Delaware.  He has extensive experience modeling interstellar dust emission, absorption properties, and grain composition as well as the application of machine learning (including neural networks and deep learning algorithms) to ~PB-scale imaging data sets.  In this project he will participate in the effort to incorporate dust properties into the analysis and applying machine learning algorithms to simulated data, as well as co-supervising the graduate and undergraduate students.
+
+\subsection{Broader Impacts}
+\input{bi.tex}
+
+\clearpage
+\noindent{\Large \bf j Supplementary Material}
+\clearpage
+\section{Postdoctoral Mentoring Plan - 1 page}
+
+\input{postdoc}
+
+\clearpage
+
+
+\newpage
+\pagenumbering{arabic}
+\renewcommand{\thepage} {E--\arabic{page}}
+
+\bibliography{draft}
+\bibliographystyle{jponew}
+
+\newpage
+\pagenumbering{arabic}
+\renewcommand{\thepage} {G--\arabic{page}}
+\noindent{\Large \bf BUDGET JUSTIFICATION}
+
+\end{document}
