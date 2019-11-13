@@ -197,56 +197,51 @@ We then take all the pixels near this plane in the HI data cube and integrate th
 
 \emph{Milestone 1} :
 
-The first milestone of this project will be the design of a Deep Neural Network architecture able to trained on these synthetic images and tested on real sky images from the Dark Energy Camera that is scalable to the orders of magnitude larger dataset that LSST will generate starting in 2022. We note that this milestone, which is our starting point, overlaps with another NSF proposal lead by PI Rest: \armin{NSFXXXX}, but this is but the beginning of our exploitation of machine learning for the discovery of LEs. Our model well go from models able to explore 7,000 sq degree in 2-3 epochs, under development by CoI Rest's team, to nearly $\sim$100 epochs per filter over 18,000 square degrees. Well beyond the ability to keep humans in the loop. The entire dataset that constitutes the basis of the largest light echo exploration to date, namely the one developed under NSFXXX, will be collected by LSST in as little as XXX weeks by LSST.  
-We will, however, leverage the results of \armin{NSFXXXX}, including LEs detected by this proposal into our training and testing sets.
-
+The first milestone of this project will be the design of a Deep Neural Network architecture able to trained on these synthetic images and tested on real sky images from the Dark Energy Camera that is scalable to the orders of magnitude larger dataset that LSST will generate starting in 2022. We note that this milestone, which is our starting point, overlaps with another NSF proposal lead by PI Rest: \armin{NSFXXXX}, that as part of its deliverables will generate methods for automated detection of light echoes in targeted searches with DECam. But this is but the beginning of our exploitation of machine learning for the discovery of LEs. Our deliverables will go from models able to explore 7,000 sq degree in 2-3 epochs, under development by CoI Rest's team, to nearly $\sim$100 epochs per filter over 18,000 square degrees for the whole LSST dataset. Well beyond the ability to keep humans in the loop. The entire dataset that constitutes the basis of the largest light echo exploration to date, namely the one developed under NSFXXX, will be collected by LSST in as little as XXX weeks.  
+We will, however, leverage the results of \armin{NSFXXXX}, including LEs detected by this proposal into our training and testing sets. The Graduate students from JHU and UD will work in parallel but in consultation with each other (and so will PI Bianco and CoI Rest who will mentor the students) to compare result and adapt early successes of the DECam pipeline to scalable models.
 
 
 However, learning from synthetic
-images may induce significant biases.  Gaps between synthetic and real image distributions are impossible to ascertain.  Although the realism of the synthetic LEs produced as described above is sufficient to fool human detection (expert human detection by CoI Rest) systematic differences between the real and synthetic data would lead a network to overfit features that are characteristic of the synthetic images and fail to
+images may induce significant biases, so the development of methods based on LEs simulated as described above will not be the only venue explored.  Gaps between synthetic and real image distributions are impossible to ascertain.  Although the realism of the synthetic LEs produced as described above is sufficient to fool human detection (expert human detection by CoI Rest) systematic differences between the real and synthetic data would lead a network to overfit features that are characteristic of the synthetic images and fail to
 generalize on real images.  \citep{Shrivastava_2017_CVPR}.  
 
 
 \section{GANS for image processing and analysis}
 
-More text.
+JHU student can run they models on our GANs
 
-\section{Proposed methodology}
+sinGAN : multiscale GANs
 
-More text.
-\section{GANS with real and simulated images}
-
-More text.
-
-\section{GANS with real and dust images}
-
-More text.
 
 \section{A model to extract dust structure from LEs}
 
+
+\section {Explosion history of the Universe}
 
 
 \section{Time Line and Management Plan}
 
 \subsection{Our team}
-PI Bianco is a new faculty member at the University of Delaware (UD) Physics and Astronomy Department and Biden School of Public Policy and Administration,  as well as a Resident Faculty member of the new UD Data Science Institute.
+{\bf PI Bianco} is a new faculty member at the University of Delaware (UD) Physics and Astronomy Department and Biden School of Public Policy and Administration,  as well as a Resident Faculty member of the new UD Data Science Institute.
 
 PI Bianco’s scientific expertise range from data science to data-driven inference in astronomical transients, from nearby Solar System [12] to distant Supernova explosions [13].   She works closely with the team building and scoping the LSST telescope and survey and represents the community working on LSST in various settings (\eg,  recently at the National Academy of Science Space Science Week, invited by the Committee on Astronomy and Astrophysics).  
 
 Among the many transient phenomena in PI Bianco’s research portfolio, she has worked on LEs collaborating with CoI Rest leading the data collection and analysis at the Las Cumbres Observatory Global network, which contributed the majority of the image data analyzed in [3] and focusing on the extraction of lightcurves from LEs that supports the analysis of typing and spectral evolution [19, 20, 24]
 and studies that relate diversity in transients to asymmetry as assessed from LEs.  Additionally, she is working on technically similar computer vision issues in the context of urban imaging at the Urban Observatory \changeit[CITE], a multi-city facility lead by Collaborator Dobler where urban environments are studied through imaging and techniques adapted from astronomy (i.e.  photometry, spectroscopy) developing methodology to detect of faint transient diffused feature generated by building HVAC system and other emissions \changeit[CITE].
 
-\subsection{Collaborator Joshua Peek, STScI}
-Collaborato Peek developed the forward modeling methodology for LEs and produced several simulations as described in~\autoref{sec:fwm}.  He will make his existing simulations available and coach students in the methodology to create a comprehensive training sample to be fed to our Neural Networks.  
-
-\subsection{Collaborator Gregory Dobler, UDelaware}
-Dobler has extensive experience modeling interstellar dust emission, absorption properties, and grain composition as well as the application of machine learning (including neural networks and deep learning algorithms) to ~PB-scale imaging data sets. He will participate in the effort to incorporate dust properties into the analysis and applying machine learning algorithms to simulated data.
+\austin{PLEASE REVIEW}
+{\bf CoI Dr. Brockmeier} is a new faculty member at the University of Delaware (UD) Electrical and Computer Engineering and, as well, a Resident Faculty member of the new UD Data Science Institute.  His expertise in signal processing range from hyperspectral to \changeit{FINISH}
 
 \armin{PLEASE REVIEW}
-Rest is a world-renowned expert in LEs, from detection to transient characterization.  He has lead several successfull programs devoted to the study of LEs, including current NSF program \armin{XXX}.  He also has lead the acquisition and analysis of light echo data used in this proposal \armin{NOAO PROPOSAL NUMBERS FOR DECAM IMAGES}.  In this project, he will supervise a Graduate student from John Hopkins University in year 1, as well as co-advising the UD Graduate students in developing a detailed work plan and set up the data access, ingestion, and manual labeling to create a standardized dataset of LEs over which the performance of our models will be measured.   
+{\bf CoI Dr. Rest} is a world-renowned expert in LEs, from detection to transient characterization.  He has lead several successfull programs devoted to the study of LEs, including current NSF program \armin{XXX}.  He also has lead the acquisition and analysis of light echo data used in this proposal \armin{NOAO PROPOSAL NUMBERS FOR DECAM IMAGES}.  In this project, he will supervise a Graduate student from John Hopkins University in year 1, as well as co-advising the UD Graduate students in developing a detailed work plan and set up the data access, ingestion, and manual labeling to create a standardized dataset of LEs over which the performance of our models will be measured.   
 
-\austin{PLEASE REVIEW}
-CoI Brockmeier is a new faculty member at the University of Delaware (UD) Electrical and Computer Engineering and, as well, a Resident Faculty member of the new UD Data Science Institute.  His expertise in signal processing range from hyperspectral to \changeit{FINISH}
+
+{\bf Collaborator Dr. Peek} developed the forward modeling methodology for LEs and produced several simulations as described in~\autoref{sec:fwm}.  He will make his existing simulations available and coach students in the methodology to create a comprehensive training sample to be fed to our Neural Networks.  
+
+{\bf Collaborator Dr. Dobler} has extensive experience modeling interstellar dust emission, absorption properties, and grain composition as well as the application of machine learning (including neural networks and deep learning algorithms) to ~PB-scale imaging data sets. He will participate in the effort to incorporate dust properties into the analysis and applying machine learning algorithms to simulated data.
+
+
+
 
 \section{Summary: Significance of proposed work}
 
