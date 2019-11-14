@@ -128,7 +128,10 @@ LEs, specifically the reflection of astronomical transients onto interstellar du
 \armin{Armin can you add to this?}
 The study of the dust structure that reflects the light allows us to characterize and study stellar eruptions through the characteristics of the ejection of material [21].
 
-The iconic images of supergiant start V838 Monocerotis are the most astounding example of LEs revealing the dust structure around a variable\footnote{\url{https://en.wikipedia.org/wiki/V838_Monocerotis}}. 
+The iconic images of supergiant start V838 Monocerotis are the most astounding example of LEs revealing the dust structure around a variable.
+\changeit[add figure?]
+
+
 
 LEs have been facilitated the study of \armin{[words words words]}
 
@@ -199,7 +202,7 @@ revolutionary potential of LSST!
 
 PI Bianco is heavily involved in the LSST Science Collaborations: she has co-chaired the Transient and Variable Stars Collaboration, which focuses on all transient and variable phenomena, since 2015, and has served as the overall LSST Science Collaborations Coordinator since 2018. This places her in a unique position to assess gaps in preparedness that will threat the promise to fulfill the potential of the US investment in LSST, and to coordinate research projects with the LSST core team. 
 
-While the LSST Project is generating a pipeline that will reduce the LSST images to produce a set of data products which include alerts about transient events, annual image stacks, it is recognized that the LSST data products will not support all science goals that the scientific community expects LSST to enable:  data pipelines that will (re-)process the LSST data or data products to obtain derived data products are referred to as “User-Generated” (UG) pipelines and data products. Due to the overwhelming size of the LSST dataset, the LSST Project will provide computational resources to run UG pipelines where the data are hosted. Producing UG pipelines will require significant training in the use of  LSST resources. This expertise is being developed within the SCs\footnote{\eg \url{https://project.lsst.org/meetings/lsst2018/content/lsst-software-community-stack-club}.} These computational resources are however \emph{shared} resourced, putting more stress on the requirements of the UG in efficiency, reproducibility, and implementation of best practices (\eg unit tests), especially for tasks that need to be performed on the LSST images (as opposed to the catalogues produced by the LSST data pipeline) such as what we are proposing.
+While the LSST Project is generating a pipeline that will reduce the LSST images to produce a set of data products which include alerts about transient events, annual image stacks, it is recognized that the LSST data products will not support all science goals that the scientific community expects LSST to enable:  data pipelines that will (re-)process the LSST data or data products to obtain derived data products are referred to as “User-Generated” (UG) pipelines and data products. Due to the overwhelming size of the LSST dataset, the LSST Project will provide computational resources to run UG pipelines where the data are hosted. Producing UG pipelines will require significant training in the use of  LSST resources. This expertise is being developed within the SCs~\citep{bianco2019better}. These computational resources are however \emph{shared} resourced, putting more stress on the requirements of the UG in efficiency, reproducibility, and implementation of best practices (\eg unit tests), especially for tasks that need to be performed on the LSST images (as opposed to the catalogues produced by the LSST data pipeline) such as what we are proposing.
 
 
 
@@ -208,7 +211,7 @@ While the LSST Project is generating a pipeline that will reduce the LSST images
 \subsection{The current light echo database}
 Over the course of several years, members of our team have collected hundreds of images of light echos.  Since 2010, the discovery of the LEs of Eta Carinae~\citep{Rest2019} lead to a hunt for echoes in this rich dust region, which truly blooms with echoes.  Even prior to this CoI Rest had engaged in search campaigns for LEs of historical transients including: Tycho, Cas A, 3 SNe Ia in the Large Magellanic Clouds, Eta Carinae, and SN 1987A, amounting to several hundred of images with LEs for about about 100 light echo groups.   
 
-While this may seem like a large number, traditional Neural Networks (such as those tested in the ImageNet\footnote{\url{http://image-net.org/}} challenge several years ago) have been shown to require at least $\sim 1000$ representative images.
+While this may seem like a large number, traditional Neural Networks (such as those tested in the ImageNet~\citeo{imagenet} challenge several years ago) have been shown to require at least $\sim 1000$ representative images.
 
 Even if the number of images were sufficient (perhaps after significant pre-processing augmentation such as cropping, rotating, reflecting) the diversity of LEs (and really of the underlying dust structure) is vast! And several, or even a few hundred light echo images (with several repeats of the same echo at different epochs) are not going to be sufficient to span the full diversity of this phenomena.  
 Finally, Rest has collected the largest dataset for the purpose of light echo detection in targeted imaging campaigns in the areas surrounding historical supernovae and stellar eruption, amounting to about 7,000 square degrees in two epochs (NSF Grant 1814993). This data will serve as our primary test-ground.
@@ -244,31 +247,37 @@ generalize on real images.  \citep{Shrivastava_2017_CVPR}.
 Deep Neural Networks (NNs) are model architecture with successive layers of transformations between the input and output that, trained on a labeled set of input-output pairs, can learn the appropriate transformation to extend the labels to unlabelled observations.
 Generative adversarial networks (GANs, \citealt{Goodfellow14}) are NN architectures comprised of two Deep Neural Network \citep{lecun2015deep} that are operating in competition (hence the "adversarial" denomination). A generator NN creates images, starting from the input of pseduo-random noise (with user specified characteristics)  and output of the full set of pixels. These synthetic images are passed to a "discriminator" NN which labels or scores them as being "real" or "fake" based on discrimination criterion already trained from the previous batch of real and fake images. 
 
-The generator and discriminator compete in a mini-max game on a shared loss function, that results in the the discriminator trying to improve its ability to disambiguate true from synthetic while the generator tries to create synthetic images that are harder to discriminator, thereby improving the quality of the synthetic images. GANs have been used to generate synthetic datasets and augment real images, with astounding success~\citep{shrivastava2016learning, Maras19}\footnote{and socially troublesome consequences \\\url{https://www.washingtonpost.com/technology/2019/06/12/top-ai-researchers-race-detect-deepfake-videos-we-are-outgunned/}}. Recently, this technique has begun appearing astrophsyics as well (\eg,~
+The generator and discriminator compete in a mini-max game on a shared loss function, that results in the the discriminator trying to improve its ability to disambiguate true from synthetic while the generator tries to create synthetic images that are harder to discriminator, thereby improving the quality of the synthetic images. Specifically, let $D: \mathcal{I} \rightarrow [0,1]$ represent the discriminator function (realized as a NN) that outputs the probability that the input image $I \in \mathcal{I}$ is real, let $G : \mathcal{N} \rightarrow  \mathcal{I}$ denote the generator function that maps an instance from the noise domain to the image domain, assuming the probability laws over real images and the noise are denoted $\mathbb{P}_X$ and $\mathbb{P}_Z$, a GAN can be seen as a solution to the mini-max optimization \citep{Goodfellow14}
+\[
+\min_{G} \max_{D}\{ V(G,D) = \mathbb{E}_{X \sim \mathbb{P}_X} [\log D(X) ] +   \mathbb{E}_{Z \sim \mathbb{P}_Z} [\log (1- D(G(Z))] \}. 
+\]
+Essentially, the goal is to minimize the divergence between $\mathbb{P}_X$ and $\mathbb{P}_{\hat{X}}$ where  $\hat{X} = G(Z), Z \sim \mathbb{P}_Z$. Efficiently computing this divergence from empirical samples~\citep{Deshpande2019}.
+
+GANs have been used to generate synthetic datasets and augment real images, with astounding success~\citep{shrivastava2016learning, Maras19}\footnote{and socially and ethically troublesome consequences}. Recently, this technique has begun appearing astrophsyics as well (\eg,~
 \citealt{Zamudio19})
 
 
 \subsection{Application of GANs to the LE detection problem.}
 
-Our first application of Generative Adversarial Neural Networks (GANs) to the problem of detecting LEs will focus on the generation of syntetic LE data. Although we have the ability to forward model LEs based on known dust structure, the AI generated LEs may provide more diversity and variety better filling the enormous feature space produced by the complex underlying dust structure and effectively infinite diversity induced by line of sight effects.
+Our first application of Generative Adversarial Neural Networks (GANs) to the problem of detecting LEs will focus on the generation of synthetic LE data. Although we have the ability to forward model LEs based on known dust structure, the AI generated LEs may provide more diversity and variety better filling the enormous feature space produced by the complex underlying dust structure and effectively infinite diversity induced by line of sight effects.
 
 Since they first appeared in 2014, GANs have demonstrated incredible potential, particularly in  generation of realistic synthetic images and videos. It is this particular application that is most relevant for our work: LEs are evolving features which will be capture densely, relatively to their time scales, by the LSST observing cadence,  and we expect that GANs will be able to reproduce the morphological and time domain properties of LEs. The pipeline generated by the team lead by CoI Rest at JHU to detect LEs in the targeted DECam searches can be tested on our GAN generated samples without any concerns about cross-talk between the generating and discriminating NNs, since the two pipelines will be produced collaboratively, but independently.
 
 A particularly relevant GAN architecture recently appeared in under the name of SinGAN~\citep{shaham2019singan}. This model, which is comprised of a hierarchical series of GANs, can learn from a single image to generate realistic augmentations by learning the structure of the data in subsets of the images of different size, effectively learning the covariance structure of the the image space at all scales. This is particularly appealing to our case due to the multi-scale complexity of the dust structure that generates the morphology of a LE.
 
-\emph{Milestone 2} : We will design an appropriate GAN architecture to generate syntehtic LEs that can be used to produce simulated LSST images with LEs and test detection pipelines in sight of LSST. These images will be used by the JHU team to test their models independently of the synthetic data generated by forward modeling.
+\emph{Milestone 2} : We will design an appropriate GAN architecture to generate synthetic LEs that can be used to produce simulated LSST images with LEs and test detection pipelines in sight of LSST. These images will be used by the JHU team to test their models independently of the synthetic data generated by forward modeling.
 
 \subsection{A model to extract dust structure from LEs}
 
-Further, AI be exploited in our work to invert the LE modeling problem and retrieve dust information from LE images. By feeding our network realizations of LEs based on known dust properties (\autoref{sec:fwm}) we can train networks to extract physical parameters from light echoes in an automated, and instant, fashion. Similar applications of NN in the astrophsyical literature include, \eg \citep{chen2019}, and, since the physical principles behind the forward models are well understood, phsyical "rules" can be embedded in the networks to assure solutions that are consistent with the phsyics framework of the problem~\citep{mattheakis2019}. 
+Further, AI be exploited in our work to invert the LE modeling problem and retrieve dust information from LE images. By feeding our network realizations of LEs based on known dust properties (\autoref{sec:fwm}) we can train networks to extract physical parameters from light echoes in an automated, and instant, fashion. Similar applications of NN in the astrophysical literature include, \eg \citep{chen2019}, and, since the physical principles behind the forward models are well understood, physical "rules" can be embedded in the networks to assure solutions that are consistent with the physics framework of the problem~\citep{mattheakis2019}. 
 
 \emph{Milestone 3} : By feeding both sets of NIR and IR images and synthetic images generated as in \autored{fwm} based on the dust properties, and NIR/IR images paired with images of light echo from the existing database of observations (Section \autoref{realdata}), we will train a neural network to generate NIR/IR images from LE images and extract dust physical properties. These models, once trained, should be effective at generating dust maps in a complementary fashion to traditional image (NIR) or extinction based methods~\citep{schafly11} in correspondence of any light echo. With the high sensitivity of LSST, these maps should generate a rich dataset of dust.
 
 \subsection{Model transferability}
-Our models will be trained primarily on DECam images. The DECam image system has very similar properties to the LSST one~\footnote{\url{https://docushare.lsstcorp.org/docushare/dsweb/Get/Publication-117/}}, alleviating concerns about transferability of our models. Furthermore, commissioning LSST data will become available at the half-way marc of our project, allowing us to assure the prompt deployment of our models on the LSST data at the beginning of LSST operations. 
+Our models will be trained primarily on DECam images. The DECam image system has very similar properties to the LSST one~\citep{2016SPIE.9906E..4JX}, alleviating concerns about transferability of our models. Furthermore, commissioning LSST data will become available at the half-way marc of our project, allowing us to assure the prompt deployment of our models on the LSST data at the beginning of LSST operations. 
 
 \section{The explosion history of the Milky Way}
-Our final and longest-term goal is a comparison of the LSST-detected LEs, down to very faint magnitude, with models of the explosion and eruption of our Galaxy. While this goal will not be accomplished until a substancial amount of LSST multiepoch data has been collected, under the resources provided by this grant PI bianco will begin generating longitudinal explosion models for our Galaxy based on initial mass function (IMF) models, and stellar evolution models. 
+Our final and longest-term goal is a comparison of the LSST-detected LEs, down to very faint magnitude, with models of the explosion and eruption of our Galaxy. While this goal will not be accomplished until a substantial amount of LSST multie-poch data has been collected, under the resources provided by this grant PI Bianco will begin generating longitudinal explosion models for our Galaxy based on initial mass function (IMF) models, and stellar evolution models. 
 
 \changeit[add]
 
@@ -280,13 +289,15 @@ Our final and longest-term goal is a comparison of the LSST-detected LEs, down t
 
 The milestones outlined in the previous Section will be pursued during this proposal between 2020 and 2023, leading to the deployment of our pipeline on the LSST computational platform as LSST begins operations. 
 
+
 \begin{figure}[htp]
     \centering
-    \includegraphics[]{gantt.png}
+    \includegraphics[width=0.8\textwidth]{gantt}
     \caption{Gantt chart of activities under this proposal}
     \label{fig:gannt}
 \end{figure}
  
+
 
 \subsection{Our team}
 
@@ -297,7 +308,7 @@ and studies that relate diversity in transients to asymmetry as assessed from LE
 
 She will supervise all work and create models of the explosion and eruption history of the Milky way assessing the optimal way to compare them with light echo detections.
 
-{\bf CoI Dr.\ Brockmeier} is a new faculty member at the University of Delaware (UD) in the Departments of Electrical and Computer Engineering and Computer and Information Sciences, and also a Resident Faculty member of the new UD Data Science Institute.  His expertise in signal processing and machine learning include sparse coding for signals, dictionary learning, measures of divergence, signal processing for multimodal data, methods for unsupervised and supervised learning, and neural networks. 
+{\bf CoI Dr.\ Brockmeier} is a new faculty member at the University of Delaware (UD) in the Departments of Electrical and Computer Engineering and Computer and Information Sciences, and also a Resident Faculty member of the new UD Data Science Institute.  His expertise in signal processing and machine learning include convolution approaches for time-series that use sparse coding and dictionary learning, kernel and distance metric based measures of divergence, signal processing for multimodal data, methods for unsupervised and supervised learning, and neural networks. 
 
 \armin{PLEASE REVIEW}
 {\bf CoI Dr. Rest} is a world-renowned expert in LEs, from detection to transient characterization.  He has lead several successfull programs devoted to the study of LEs, including current NSF program 1814993.  He also has lead the acquisition and analysis of light echo data used in this proposal \armin{NOAO PROPOSAL NUMBERS FOR DECAM IMAGES}.  In this project, he will supervise a Graduate student from John Hopkins University in year 1, as well as co-advising the UD Graduate students in developing a detailed work plan and set up the data access, ingestion, and manual labeling to create a standardized dataset of LEs over which the performance of our models will be measured.   
@@ -323,7 +334,7 @@ More text.
 
 \subsection{CoI Armin Rest, STScI}
 
-Dr. Rest, CoI, and his grad student will contribute to the early phases of the project (y1) by: connecting the results of current NSF funded research on light echoes with the work developed by this team, including sharing data from the KPNO Mosaic II and Mosaic 3, Blanco Mosaic II and DECam, ATLAS systems collected under proposals including NSF grant #128913. Dr. Rest’s JHU graduate student (Roee Partoush) and postdoc (Ryan Ridden-Harper) have started to work on the pipeline and tools to find light echoes in the targeted DECam data, funded by NSF grant #128913. The DECam total data volume is less than just a couple of weeks of the LSST data volume, and therefore the prototype pipeline and tools developed by Dr. Rest’s team need to be further developed for the LSST data. The UD Graduate student working under PI Bianco’s supervision will work closely with Roee Partoush to learn about the DECam tools and adapt what can be used for the LSST pipeline. Rest and his student will help to vet the detection algorithms efficiency and purity with expert knowledge on the detection of light echoes. This is important because, necessarily, the light echoes examples that will be feed to the algorithms  for training and testing can be pure, but not complete (in other words, any real image will contain light echoes that may not have been detected even by accurate visual inspection, as the luminosity of light echoes decreases to 0 without discontinuities).
+Dr. Rest, CoI, and his grad student will contribute to the early phases of the project (y1) by: connecting the results of current NSF funded research on light echoes with the work developed by this team, including sharing data from the KPNO Mosaic II and Mosaic 3, Blanco Mosaic II and DECam, ATLAS systems collected under proposals including NSF grant 1814993. Dr. Rest’s JHU graduate student (Roee Partoush) and postdoc (Ryan Ridden-Harper) have started to work on the pipeline and tools to find light echoes in the targeted DECam data, funded by NSF grant 1814993. The DECam total data volume is less than just a couple of weeks of the LSST data volume, and therefore the prototype pipeline and tools developed by Dr. Rest’s team need to be further developed for the LSST data. The UD Graduate student working under PI Bianco’s supervision will work closely with Roee Partoush to learn about the DECam tools and adapt what can be used for the LSST pipeline. Rest and his student will help to vet the detection algorithms efficiency and purity with expert knowledge on the detection of light echoes. This is important because, necessarily, the light echoes examples that will be feed to the algorithms  for training and testing can be pure, but not complete (in other words, any real image will contain light echoes that may not have been detected even by accurate visual inspection, as the luminosity of light echoes decreases to 0 without discontinuities).
 
 CoI Rest will provide expertise in later phases of the project at no cost, under his STScI funded responsibility, by helping to create models of explosion and eruption across the Galaxy to be integrated into our pipeline, and designing tests to vet the ability of our models to extract dust properties form light echoes.
 
